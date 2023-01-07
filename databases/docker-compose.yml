@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  pg:
+    image: arm64v8/postgres:13
+    restart: always
+    container_name: pg-local
+    environment:
+      POSTGRES_PASSWORD: lenovo
+      POSTGRES_DB: lenovo
+    ports:
+      - '5432:5432'
+    networks:
+      - backend
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongo-local
+    ports:
+      - '27018:27017'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  data:
+    driver: local
